@@ -9,5 +9,6 @@ describe("CreateToken", function () {
         await CreateToken.deployed();
         expect(await CreateToken.balanceOf(deployer.address)).equal(100);
     }
+       //transfer to 3 people
     );
 });
