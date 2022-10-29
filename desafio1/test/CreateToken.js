@@ -8,7 +8,7 @@ describe("CreateToken", function () {
         const CreateToken = await CreateTokenFactory.deploy();
         await CreateToken.deployed();
         expect(await CreateToken.balanceOf(deployer.address)).equal(100);
-        CreateToken.transfer("0x5B38Da6a701c568545dCfcB03FcB875f56beddC4", 22);
+        CreateToken.transfer("0x8626f6940E2eb28930eFb4CeF49B2d1F2C9C1199", 22);
         CreateToken.transfer("0xAb8483F64d9C6d1EcF9b849Ae677dD3315835cb2", 10);
         CreateToken.transfer("0x4B20993Bc481177ec7E8f571ceCaE8A9e22C02db", 37);
         expect(await CreateToken.balanceOf(deployer.address)).equal(31);
