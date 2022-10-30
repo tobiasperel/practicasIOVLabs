@@ -1,4 +1,5 @@
-# Guia para correr el backend 💻
+# Practivas IovLabs 💻
+
 1-  Instalar venv:
 
 ```bash 
@@ -8,26 +9,7 @@ py -m venv env
 
 ```
 
-2- Correr `requirements.txt`:
-```bash 
-pip install -r requirements.txt
 
-```
-3- Crear una Base de datos con el mismo nombre que en [settings](ApiDjango/mysite/settings.py) y remplazar el nombre del host.
-
-4- Migrar las tablas posicionarse en [ApiDjango](apiDjango):
-```python
-cd ApiDjango
-python manage.py migrate
-python manage.py makemigrations General
-python manage.py migrate
-```
-
-5- Para correr el programa poner el siguente comando:
-```(Estar parado sobre /backend/apidjango)```
-```python 
-python manage.py runserver
-```
 ---
 Material complementario:
 
