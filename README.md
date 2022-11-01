@@ -16,6 +16,13 @@ Librerias a instalar:
 @openzeppelin/contracts
 ```
 
+Extenciones utiles:
+
+```shell 
+NomicFoundation.hardhat-solidity
+```
+Aclaracion no instalar JuanBlanco.solidity
+
 ---
 Material complementario:
 

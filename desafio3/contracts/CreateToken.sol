@@ -19,7 +19,7 @@ contract CreateToken is ERC20, Ownable {
     function changeTimeMinute(uint _timeMinute) public onlyOwner {
         timeMinute = _timeMinute;
     }
-    function seetimeMinute() public view returns(uint) {
+    function seeTimeMinute() public view returns(uint) {
         return timeMinute;
     }
 }
