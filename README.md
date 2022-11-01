@@ -10,6 +10,12 @@ npx hardhat node
 npx hardhat run scripts/deploy.js
 ```
 
+Para limpiar el compilador
+```shell 
+npx hardhat clean
+npx hardhat compile
+```
+
 Librerias a instalar:
 
 ```shell 
