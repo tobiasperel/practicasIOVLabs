@@ -10,6 +10,11 @@ npx hardhat node
 npx hardhat run scripts/deploy.js
 ```
 
+Librerias a instalar:
+
+```shell 
+@openzeppelin/contracts
+```
 
 ---
 Material complementario:
