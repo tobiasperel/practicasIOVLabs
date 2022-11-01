@@ -14,6 +14,7 @@ Librerias a instalar:
 
 ```shell 
 @openzeppelin/contracts
+@nomicfoundation/hardhat-toolbox@^2.0.0
 ```
 
 Extenciones utiles:
