@@ -6,17 +6,21 @@ import "@openzeppelin/contracts/access/Ownable.sol";
 import "./CreateToken.sol";
 
 contract PayMethod is CreateToken {
-    constructor() {}
+    uint amount;
 
-    mapping(address => bool) private contributions;
+    constructor() {
+        amount = 10;
+    }
+
+    mapping(address => bool) private contributors;
 
     function makeContributor() public payable {
         require(msg.value > 10 ether, "No se puede hacer una contribucion de 0");
-        contributions[msg.sender] = true;
+        contributors[msg.sender] = true;
     }
-    function sayHello() public view returns (string memory) {
-        require (contributions[msg.sender] == true, "No eres contribuidor");
-        return "Hello World";
+    function buy() public {
+        require(CreateToken.transferFrom(msg.sender, this, amount));
+
     }
 }
 
