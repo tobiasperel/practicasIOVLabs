@@ -49,7 +49,7 @@ describe("CreateToken", function () {
         const PayMethod = await PayMethodFactory.deploy();
         await PayMethod.deployed();
         await PayMethod.makeContributor( { value: ethers.utils.parseEther("11") });
-        console.log(await PayMethod.sayHello()) ;
+        await PayMethod.buy( { value: ethers.utils.parseEther("7") });
     }
     );
 });
