@@ -12,10 +12,17 @@ contract CreateToken is ERC20, Ownable {
     uint lastMint = 0;
 
     function mint(address account, uint256 amount) public {
-        require(block.timestamp > lastMint + timeMinute, "No se puede minar");
+        require(block.timestamp > lastMint + timeMinute, "No se puede minar"); //desafio2
         lastMint = block.timestamp;
         _mint(account, amount);
     }
+    function mintTwoAccounts(address account1, address account2, uint256 amount) public {
+        require(block.timestamp > lastMint + timeMinute, "No se puede minar");
+        lastMint = block.timestamp;
+        _mint(account1, amount);
+        _mint(account2, amount);
+    }
+
     function changeTimeMinute(uint _timeMinute) public onlyOwner {
         timeMinute = _timeMinute;
     }

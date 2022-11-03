@@ -28,7 +28,7 @@ Extenciones utiles:
 ```shell 
 NomicFoundation.hardhat-solidity
 ```
-Aclaracion no instalar JuanBlanco.solidity
+Aclaracion no instalar JuanBlanco.solidity y beaugunderson.solidity-extended
 
 ---
 Material complementario:

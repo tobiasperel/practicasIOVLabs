@@ -12,22 +12,20 @@ contract PayMethod is CreateToken {
 
     constructor() {
         amount = 10;
+        token = new ERC20("Token", "TKN");
     }
-
+    function buy() public payable {
+        require(msg.value >= amount, "Not enough ether");
+        token.mint(msg.sender, 1);
+        emit Bought(1);
+    }
     mapping(address => bool) private contributors;
+    mapping(address => uint256) private balances;
 
     function makeContributor() public payable {
         require(msg.value > 10 ether, "No se puede hacer una contribucion de 0");
         contributors[msg.sender] = true;
     }
-    function buy() public payable {
-        uint256 amountTobuy = msg.value;
-        require(amountTobuy == 7 ether, "No se puede comprar");
-        uint256 dexBalance = balanceOf(address(this));
-        require(amountTobuy > 0, "Debe comprar al menos 1 token");
-        require(amountTobuy <= dexBalance, "No hay suficientes fichas en la reserva");
-        //ficha.transfer(msg.sender, amountTobuy);
-        //emit Bought(amountTobuy);
-    } 
+    
 }
 
