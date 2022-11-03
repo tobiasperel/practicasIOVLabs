@@ -6,26 +6,32 @@ import "@openzeppelin/contracts/access/Ownable.sol";
 import "./CreateToken.sol";
 
 contract PayMethod is CreateToken {
-    uint amount;
+    uint256 amount;
     
-    event Bought(uint256 amount);
-
     constructor() {
         amount = 10;
-        //token = new ERC20("Token", "TKN");
     }
-    /*
-    function buy() public payable {
-        require(msg.value >= amount, "Not enough ether");
-        token.mint(msg.sender, 1);
-        emit Bought(1);
-    }*/
     mapping(address => bool) internal contributors;
-    mapping(address => uint256) private balances;
+    mapping(address => uint256) private tokenGastados;
 
-    function makeContributor() public payable {
-        require(msg.value > 10 ether, "No se puede hacer una contribucion de 0");
-        contributors[msg.sender] = true;
+    function aprobarToken() public  {
+        CreateToken.aprobarElToken(amount);
+    }
+
+    function buy(uint256 amountUser,address  otherPerson) payable public returns (bool)  {
+        CreateToken.transferirElToken(otherPerson, amountUser);
+        tokenGastados[msg.sender] += amountUser;
+        if (tokenGastados[msg.sender] >= amount) {
+            contributors[msg.sender] = true;
+            return true;
+        }
+        return false;
+    }
+
+    function makeContributor() public {
+        if (tokenGastados[msg.sender] >= amount) {
+            contributors[msg.sender] = true;
+        }
     }
     
 }

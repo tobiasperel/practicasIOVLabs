@@ -25,7 +25,7 @@ describe("CreateToken", function () {
         expect(await CreateToken.balanceOf("0x8626f6940E2eb28930eFb4CeF49B2d1F2C9C1199")).equal(22);
         expect(await CreateToken.balanceOf("0xAb8483F64d9C6d1EcF9b849Ae677dD3315835cb2")).equal(10);
         expect(await CreateToken.balanceOf("0x4B20993Bc481177ec7E8f571ceCaE8A9e22C02db")).equal(37);
-        
+        const tokenAddress = (await CreateToken.address)
         //desafio2
         async function tryToMintTwoAccounts (account1,account2, amount,msg) {
             try {
@@ -41,16 +41,33 @@ describe("CreateToken", function () {
                 errores(e, msg);
             }
         }
-        tryToMintTwoAccounts(deployer.address,"0x8626f6940E2eb28930eFb4CeF49B2d1F2C9C1199", 10, "No se puede mintear");
+        await tryToMintTwoAccounts(deployer.address,"0x8626f6940E2eb28930eFb4CeF49B2d1F2C9C1199", 10, "No se puede mintear");
         expect(await CreateToken.balanceOf(deployer.address)).to.equal(41);
-        tryToMint(deployer.address, 10, "No se puede crear el token,no has esperado 100 minutos");
+        await tryToMint(deployer.address, 10, "No se puede crear el token,no has esperado 100 minutos");
         expect(await CreateToken.seeTimeMinute()).to.equal(100);
         await CreateToken.changeTimeMinute(1);
         expect(await CreateToken.seeTimeMinute()).to.equal(1);
-
+        
         const PayMehodFactory = await ethers.getContractFactory("PayMethod");
         const PayMethod = await PayMehodFactory.deploy();
         await PayMethod.deployed();
+        // console.log(await CreateToken.balanceOf(deployer.address))
+        // console.log(await CreateToken.balanceOf("0x8626f6940E2eb28930eFb4CeF49B2d1F2C9C1199"))
+        await PayMethod.aprobarToken();
+        console.log('probando', await PayMethod.buy(10,"0x8626f6940E2eb28930eFb4CeF49B2d1F2C9C1199")) //.then((tx) => {console.log(tx)}); //el error es que se mmanda value 0 y no 5
+        // console.log(await CreateToken.balanceOf(deployer.address))
+        // console.log(await CreateToken.balanceOf("0x8626f6940E2eb28930eFb4CeF49B2d1F2C9C1199"))
+        //desafio4
+        const ContribuidoresFactory = await ethers.getContractFactory("Contribuidores");
+        const Contribuidores = await ContribuidoresFactory.deploy();
+        await Contribuidores.deployed();
+        const esContribuidor = await Contribuidores.isContributor(deployer.address);
+        //console.log(esContribuidor);
+        const createNFTFactory = await ethers.getContractFactory("CreateNFT");
+        const CreateNFT = await createNFTFactory.deploy();
+        await CreateNFT.deployed();
+        await CreateNFT.makeNFT(true);
+        console.log(await CreateNFT.balanceOf(deployer.address));
     }
     );
 });

@@ -8,8 +8,6 @@ import "./CreateToken.sol";
 contract PayMethod is CreateToken {
     uint256 amount;
     
-    event Bought(uint256 amount);
-
     constructor() {
         amount = 10;
     }
@@ -26,7 +24,6 @@ contract PayMethod is CreateToken {
         if (tokenGastados[msg.sender] >= amount) {
             contributors[msg.sender] = true;
         }
-        emit Bought(amountUser);
     }
     function makeContributor() public {
         if (tokenGastados[msg.sender] >= amount) {

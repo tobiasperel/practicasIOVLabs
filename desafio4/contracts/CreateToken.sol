@@ -11,7 +11,7 @@ contract CreateToken is ERC20, Ownable {
     uint timeMinute = 100;
     uint lastMint = 0;
 
-    function mint(address account, uint256 amount) public {
+    function mint(address account, uint256 amount) public { 
         require(block.timestamp > lastMint + timeMinute, "No se puede minar"); //desafio2
         lastMint = block.timestamp;
         _mint(account, amount);
@@ -22,11 +22,20 @@ contract CreateToken is ERC20, Ownable {
         _mint(account1, amount);
         _mint(account2, amount);
     }
-
     function changeTimeMinute(uint _timeMinute) public onlyOwner {
         timeMinute = _timeMinute;
     }
     function seeTimeMinute() public view returns(uint) {
         return timeMinute;
+    }
+    function aprobarElToken(uint256 amount) public {
+        return _approve(msg.sender,msg.sender, amount);
+    }
+    function transferirElToken(address yourAddress, uint256 amount) payable public {
+        transferFrom(msg.sender, yourAddress, amount);
+    }
+    
+    function seeAddress() public view returns(address) {
+        return address(this);
     }
 }
