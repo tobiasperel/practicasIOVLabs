@@ -12,14 +12,15 @@ contract PayMethod is CreateToken {
 
     constructor() {
         amount = 10;
-        token = new ERC20("Token", "TKN");
+        //token = new ERC20("Token", "TKN");
     }
+    /*
     function buy() public payable {
         require(msg.value >= amount, "Not enough ether");
         token.mint(msg.sender, 1);
         emit Bought(1);
-    }
-    mapping(address => bool) private contributors;
+    }*/
+    mapping(address => bool) internal contributors;
     mapping(address => uint256) private balances;
 
     function makeContributor() public payable {

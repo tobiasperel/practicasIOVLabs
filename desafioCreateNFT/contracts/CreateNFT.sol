@@ -6,7 +6,6 @@ import "@openzeppelin/contracts/access/Ownable.sol";
 
 contract CreateNFT is ERC721, Ownable {
     constructor() ERC721("Roger Federer", "RF") {}
-    uint public patitos = 0;
     function safeMint(address to, uint256 tokenId) public onlyOwner {
         _safeMint(to, tokenId);
     }
