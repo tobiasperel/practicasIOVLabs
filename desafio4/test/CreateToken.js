@@ -54,7 +54,7 @@ describe("CreateToken", function () {
         // console.log(await CreateToken.balanceOf(deployer.address))
         // console.log(await CreateToken.balanceOf("0x8626f6940E2eb28930eFb4CeF49B2d1F2C9C1199"))
         await PayMethod.aprobarToken();
-        console.log('probando', await PayMethod.buy(10,"0x8626f6940E2eb28930eFb4CeF49B2d1F2C9C1199")) //.then((tx) => {console.log(tx)}); //el error es que se mmanda value 0 y no 5
+        console.log('probando', await PayMethod.buy(10,"0x8626f6940E2eb28930eFb4CeF49B2d1F2C9C1199")) //el error es que se mmanda value 0 y no 5
         // console.log(await CreateToken.balanceOf(deployer.address))
         // console.log(await CreateToken.balanceOf("0x8626f6940E2eb28930eFb4CeF49B2d1F2C9C1199"))
         //desafio4

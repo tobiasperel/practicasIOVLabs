@@ -5,7 +5,6 @@ import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 
 contract CreateNFT is ERC721 {
     uint256 public tokenId;
-    mapping (address => bool) private seLeDioElNFT;
 
     constructor() ERC721("Gabriel Stacanelli", "GT") {
         tokenId = 1;
