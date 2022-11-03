@@ -16,11 +16,12 @@ contract PayMethod is CreateToken {
     mapping(address => bool) internal contributors;
     mapping(address => uint256) private tokenGastados;
 
-    function aprobarToken(address myToken) public onlyOwner {
-        CreateToken.IERC20(myToken).approve(address(this), amount);
+    function aprobarToken() public  {
+        CreateToken.aprobarElToken(CreateToken.seeAddress(), amount);
     }
+
     function buy(uint256 amountUser) public {
-        require(transferFrom(msg.sender, address(this),amountUser), "No se pudo transferir");
+        require(transferFrom(msg.sender, address(this), amountUser), "No se pudo transferir");
         tokenGastados[msg.sender] += amountUser;
         if (tokenGastados[msg.sender] >= amount) {
             contributors[msg.sender] = true;

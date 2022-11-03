@@ -41,9 +41,9 @@ describe("CreateToken", function () {
                 errores(e, msg);
             }
         }
-        tryToMintTwoAccounts(deployer.address,"0x8626f6940E2eb28930eFb4CeF49B2d1F2C9C1199", 10, "No se puede mintear");
+        await tryToMintTwoAccounts(deployer.address,"0x8626f6940E2eb28930eFb4CeF49B2d1F2C9C1199", 10, "No se puede mintear");
         expect(await CreateToken.balanceOf(deployer.address)).to.equal(41);
-        tryToMint(deployer.address, 10, "No se puede crear el token,no has esperado 100 minutos");
+        await tryToMint(deployer.address, 10, "No se puede crear el token,no has esperado 100 minutos");
         expect(await CreateToken.seeTimeMinute()).to.equal(100);
         await CreateToken.changeTimeMinute(1);
         expect(await CreateToken.seeTimeMinute()).to.equal(1);
@@ -51,8 +51,8 @@ describe("CreateToken", function () {
         const PayMehodFactory = await ethers.getContractFactory("PayMethod");
         const PayMethod = await PayMehodFactory.deploy();
         await PayMethod.deployed();
-        await PayMethod.aprobarToken()
-        //await PayMethod.buy(9) 
+        await PayMethod.aprobarToken();
+        await PayMethod.buy(10);
     }
     );
 });
