@@ -51,8 +51,12 @@ describe("CreateToken", function () {
         const PayMehodFactory = await ethers.getContractFactory("PayMethod");
         const PayMethod = await PayMehodFactory.deploy();
         await PayMethod.deployed();
+        // console.log(await CreateToken.balanceOf(deployer.address))
+        // console.log(await CreateToken.balanceOf("0x8626f6940E2eb28930eFb4CeF49B2d1F2C9C1199"))
         await PayMethod.aprobarToken();
-        await PayMethod.buy(10);
+        await PayMethod.buy(5,"0x8626f6940E2eb28930eFb4CeF49B2d1F2C9C1199")//.then((tx) => {console.log(tx)}); //el error es que se mmanda value 0 y no 5
+        // console.log(await CreateToken.balanceOf(deployer.address))
+        // console.log(await CreateToken.balanceOf("0x8626f6940E2eb28930eFb4CeF49B2d1F2C9C1199"))
     }
     );
 });

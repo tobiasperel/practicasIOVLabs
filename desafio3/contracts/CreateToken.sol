@@ -28,9 +28,13 @@ contract CreateToken is ERC20, Ownable {
     function seeTimeMinute() public view returns(uint) {
         return timeMinute;
     }
-    function aprobarElToken(address myAddress, uint256 amount) public onlyOwner {
+    function aprobarElToken(uint256 amount) public {
         return _approve(msg.sender,msg.sender, amount);
     }
+    function transferirElToken(address yourAddress, uint256 amount) payable public {
+        transferFrom(msg.sender, yourAddress, amount);
+    }
+    
     function seeAddress() public view returns(address) {
         return address(this);
     }

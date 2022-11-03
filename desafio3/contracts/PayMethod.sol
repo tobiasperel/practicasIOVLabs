@@ -17,11 +17,11 @@ contract PayMethod is CreateToken {
     mapping(address => uint256) private tokenGastados;
 
     function aprobarToken() public  {
-        CreateToken.aprobarElToken(CreateToken.seeAddress(), amount);
+        CreateToken.aprobarElToken(amount);
     }
 
-    function buy(uint256 amountUser) public {
-        require(transferFrom(msg.sender, address(this), amountUser), "No se pudo transferir");
+    function buy(uint256 amountUser,address  otherPerson) payable public {
+        CreateToken.transferirElToken(otherPerson, amountUser);
         tokenGastados[msg.sender] += amountUser;
         if (tokenGastados[msg.sender] >= amount) {
             contributors[msg.sender] = true;
