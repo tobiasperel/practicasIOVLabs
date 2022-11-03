@@ -11,3 +11,9 @@ REPORT_GAS=true npx hardhat test
 npx hardhat node
 npx hardhat run scripts/deploy.js
 ```
+Crear tu propio token.
+● Elegir un buen nombre!
+● Mintear 100 tokens para el creador del token cuando se crea el
+contrato.
+● Consultar el balance de Tokens.
+● Transferir a 3 cuentas distintas y consultar su balance
