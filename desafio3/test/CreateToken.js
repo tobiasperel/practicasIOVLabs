@@ -11,7 +11,7 @@ function errores(err, msg) {
 
 describe("CreateToken", function () {
     it('has initial message', async  () => {
-        const [deployer] = await ethers.getSigners();
+        const [deployer,bob] = await ethers.getSigners();
         const CreateTokenFactory = await ethers.getContractFactory("CreateToken");
         const CreateToken = await CreateTokenFactory.deploy();
         await CreateToken.deployed();
@@ -43,11 +43,18 @@ describe("CreateToken", function () {
         }
         await tryToMintTwoAccounts(deployer.address,"0x8626f6940E2eb28930eFb4CeF49B2d1F2C9C1199", 10, "No se puede mintear");
         expect(await CreateToken.balanceOf(deployer.address)).to.equal(41);
+
+        for (let i = 0; i < 100; i++) {
+            await ethers.provider.send("evm_mine", []);
+        }
+
         await tryToMint(deployer.address, 10, "No se puede crear el token,no has esperado 100 minutos");
         expect(await CreateToken.seeTimeMinute()).to.equal(100);
         await CreateToken.changeTimeMinute(1);
         expect(await CreateToken.seeTimeMinute()).to.equal(1);
-        
+
+        //desafio3
+
         const PayMehodFactory = await ethers.getContractFactory("PayMethod");
         const PayMethod = await PayMehodFactory.deploy();
         await PayMethod.deployed();
@@ -59,4 +66,8 @@ describe("CreateToken", function () {
         // console.log(await CreateToken.balanceOf("0x8626f6940E2eb28930eFb4CeF49B2d1F2C9C1199"))
     }
     );
+});
+
+describe("PayMethod", function ()  => {
+
 });

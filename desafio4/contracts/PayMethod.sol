@@ -14,8 +14,8 @@ contract PayMethod is CreateToken {
     mapping(address => bool) internal contributors;
     mapping(address => uint256) private tokenGastados;
 
-    function aprobarToken() public  {
-        CreateToken.aprobarElToken(amount);
+    function aprobarToken(uint amountUser) public  {
+        CreateToken.aprobarElToken(amountUser);
     }
 
     function buy(uint256 amountUser,address  otherPerson) payable public returns (bool)  {
