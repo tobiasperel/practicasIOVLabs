@@ -11,7 +11,7 @@ contract MyTokenReceiver {
         token = _token;
     }
 
-    function contribute() external {
+    function contribuir() external {
         token.transferFrom(msg.sender, address(this), 10);
         isContributor[msg.sender] = true;
     }
