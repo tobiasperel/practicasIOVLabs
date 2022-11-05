@@ -1,6 +1,14 @@
 import { expect } from 'chai'
 import { ethers } from 'hardhat'
 
+
+async function deploy() {
+  const myTokenFactory = await ethers.getContractFactory('MyToken')
+  const myToken = await myTokenFactory.deploy()
+  await myToken.deployed()
+  return myToken
+}
+
 describe('MyToken', () => {
   describe('mint', () => {
     it('mint success', async () => {
@@ -21,7 +29,6 @@ describe('MyToken', () => {
 
       const tx = await myToken.connect(bob).mint()
       await tx.wait()
-
       await expect(myToken.connect(bob).mint()).rejectedWith('Too early')
     })
 
@@ -54,13 +61,14 @@ describe('MyToken', () => {
       await expect(myToken.connect(mallory).changeBlockPeriod(1)).rejectedWith('Only owner')
     })
     // cannot mint after new set time
+    it('Owner can change time', async () => {
+      const myToken = await deploy()
+
+      const [alice] = await ethers.getSigners()
+
+      await myToken.connect(alice).changeBlockPeriod(1) ;
+      expect(await myToken.blockPeriod()).equal(1)
+    })
   })
 })
-
-async function deploy() {
-  const myTokenFactory = await ethers.getContractFactory('MyToken')
-  const myToken = await myTokenFactory.deploy()
-  await myToken.deployed()
-  return myToken
-}
 

@@ -10,7 +10,7 @@ async function deploy() {
 
 describe('MyTokenReceiver', () => {
   it('marks contributors', async () => {
-    const [alice] = await ethers.getSigners()
+    const [alice,bob] = await ethers.getSigners()
     const myToken = await deploy()
 
     const myTokenReceiverFactory = await ethers.getContractFactory('MyTokenReceiver')
@@ -18,7 +18,9 @@ describe('MyTokenReceiver', () => {
     await myTokenReceiver.deployed()
 
     await myToken.connect(alice).approve(myTokenReceiver.address, 10).then(tx => tx.wait())
-    await myTokenReceiver.contribute().then(tx => tx.wait())
+    await myTokenReceiver.contribuir().then(tx => tx.wait())
+
+    
 
     expect(await myToken.balanceOf(alice.address)).eq(90)
     expect(await myToken.balanceOf(myTokenReceiver.address)).eq(10)
